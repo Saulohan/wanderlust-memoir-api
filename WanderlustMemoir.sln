@@ -1,0 +1,42 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WanderlustMemoir.Domain", "src\WanderlustMemoir.Domain\WanderlustMemoir.Domain.csproj", "{A1B2C3D4-E5F6-7890-ABCD-123456789012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WanderlustMemoir.Application", "src\WanderlustMemoir.Application\WanderlustMemoir.Application.csproj", "{128A623D-767F-4165-9105-8F445BCC5C6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WanderlustMemoir.Infrastructure", "src\WanderlustMemoir.Infrastructure\WanderlustMemoir.Infrastructure.csproj", "{042C8102-CF2B-4473-A67E-E0886DE1527B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WanderlustMemoir.API", "src\WanderlustMemoir.API\WanderlustMemoir.API.csproj", "{F25F861F-D2AA-467A-B4C1-CDFB8FFC409C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1B2C3D4-E5F6-7890-ABCD-123456789012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-123456789012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-123456789012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1B2C3D4-E5F6-7890-ABCD-123456789012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{128A623D-767F-4165-9105-8F445BCC5C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{128A623D-767F-4165-9105-8F445BCC5C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{128A623D-767F-4165-9105-8F445BCC5C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{128A623D-767F-4165-9105-8F445BCC5C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{042C8102-CF2B-4473-A67E-E0886DE1527B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042C8102-CF2B-4473-A67E-E0886DE1527B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042C8102-CF2B-4473-A67E-E0886DE1527B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042C8102-CF2B-4473-A67E-E0886DE1527B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25F861F-D2AA-467A-B4C1-CDFB8FFC409C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25F861F-D2AA-467A-B4C1-CDFB8FFC409C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25F861F-D2AA-467A-B4C1-CDFB8FFC409C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25F861F-D2AA-467A-B4C1-CDFB8FFC409C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1CEE4B7C-D5E8-4FA0-8077-4EB5066D1956}
+	EndGlobalSection
+EndGlobal
