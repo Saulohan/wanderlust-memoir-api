@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using WanderlustMemoir.Application.DTOs.Destinations;
 using WanderlustMemoir.Application.Features.Destinations.Queries;
+using WanderlustMemoir.Domain.Entities;
 using WanderlustMemoir.Domain.Repositories;
 
 namespace WanderlustMemoir.Application.Features.Destinations.Handlers;
@@ -39,5 +40,20 @@ public class GetDestinationByIdHandler : IRequestHandler<GetDestinationByIdQuery
     {
         var destination = await _repository.GetByIdAsync(request.Id);
         return destination == null ? null : _mapper.Map<DestinationDto>(destination);
+    }
+}
+
+public class GetDestinationPhotoByIdHandler : IRequestHandler<GetDestinationPhotoByIdQuery, DestinationPhoto?>
+{
+    private readonly IDestinationRepository _repository;
+
+    public GetDestinationPhotoByIdHandler(IDestinationRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public async Task<DestinationPhoto?> Handle(GetDestinationPhotoByIdQuery request, CancellationToken cancellationToken)
+    {
+        return await _repository.GetDestinationPhotoByIdAsync(request.PhotoId);
     }
 }

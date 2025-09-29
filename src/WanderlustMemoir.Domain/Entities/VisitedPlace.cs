@@ -9,5 +9,5 @@ public class VisitedPlace : BaseEntity
     public DateTime VisitDate { get; set; }
     public string Description { get; set; } = string.Empty;
     public int Rating { get; set; } = 5;
-    public List<Photo> Photos { get; set; } = new();
+    public List<VisitedPlacePhoto> Photos { get; set; } = new();
 }

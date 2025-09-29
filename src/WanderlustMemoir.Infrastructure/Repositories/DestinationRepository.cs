@@ -16,12 +16,16 @@ public class DestinationRepository : IDestinationRepository
 
     public async Task<IEnumerable<Destination>> GetAllAsync()
     {
-        return await _context.Destinations.ToListAsync();
+        return await _context.Destinations
+            .Include(d => d.Photos)
+            .ToListAsync();
     }
 
     public async Task<Destination?> GetByIdAsync(int id)
     {
-        return await _context.Destinations.FindAsync(id);
+        return await _context.Destinations
+            .Include(d => d.Photos)
+            .FirstOrDefaultAsync(d => d.Id == id);
     }
 
     public async Task<Destination> CreateAsync(Destination destination)
@@ -36,16 +40,27 @@ public class DestinationRepository : IDestinationRepository
     {
         _context.Entry(destination).State = EntityState.Modified;
         await _context.SaveChangesAsync();
-        return destination;
+        
+        // Recarregar com fotos
+        return await GetByIdAsync(destination.Id) ?? destination;
     }
 
     public async Task DeleteAsync(int id)
     {
-        var destination = await _context.Destinations.FindAsync(id);
+        var destination = await _context.Destinations
+            .Include(d => d.Photos)
+            .FirstOrDefaultAsync(d => d.Id == id);
+            
         if (destination != null)
         {
             _context.Destinations.Remove(destination);
             await _context.SaveChangesAsync();
         }
+    }
+
+    public async Task<DestinationPhoto?> GetDestinationPhotoByIdAsync(int photoId)
+    {
+        return await _context.DestinationPhotos
+            .FirstOrDefaultAsync(p => p.Id == photoId);
     }
 }

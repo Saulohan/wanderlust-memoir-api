@@ -9,4 +9,5 @@ public interface IDestinationRepository
     Task<Destination> CreateAsync(Destination destination);
     Task<Destination> UpdateAsync(Destination destination);
     Task DeleteAsync(int id);
+    Task<DestinationPhoto?> GetDestinationPhotoByIdAsync(int photoId);
 }

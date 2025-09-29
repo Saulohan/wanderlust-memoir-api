@@ -10,9 +10,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
     {
-        // Add DbContext - using InMemory for demonstration
+        // Add DbContext - using SQL Server
         services.AddDbContext<WanderlustMemoirDbContext>(options =>
-            options.UseInMemoryDatabase("WanderlustMemoirDb"));
+            options.UseSqlServer(connectionString));
 
         // Add Repositories
         services.AddScoped<IDestinationRepository, DestinationRepository>();

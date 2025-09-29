@@ -40,16 +40,41 @@ public class VisitedPlaceRepository : IVisitedPlaceRepository
     {
         _context.Entry(visitedPlace).State = EntityState.Modified;
         await _context.SaveChangesAsync();
-        return visitedPlace;
+        
+        // Recarregar com fotos
+        return await GetByIdAsync(visitedPlace.Id) ?? visitedPlace;
     }
 
     public async Task DeleteAsync(int id)
     {
-        var visitedPlace = await _context.VisitedPlaces.FindAsync(id);
+        var visitedPlace = await _context.VisitedPlaces
+            .Include(vp => vp.Photos)
+            .FirstOrDefaultAsync(vp => vp.Id == id);
+            
         if (visitedPlace != null)
         {
             _context.VisitedPlaces.Remove(visitedPlace);
             await _context.SaveChangesAsync();
         }
+    }
+
+    public async Task<VisitedPlacePhoto?> GetPhotoByIdAsync(int photoId)
+    {
+        return await _context.VisitedPlacePhotos
+            .FirstOrDefaultAsync(p => p.Id == photoId);
+    }
+
+    public async Task<bool> DeletePhotoAsync(int placeId, int photoId)
+    {
+        // Buscar a foto específica que pertence ao lugar visitado
+        var photo = await _context.VisitedPlacePhotos
+            .FirstOrDefaultAsync(p => p.Id == photoId && p.VisitedPlaceId == placeId);
+
+        if (photo == null)
+            return false;
+
+        _context.VisitedPlacePhotos.Remove(photo);
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

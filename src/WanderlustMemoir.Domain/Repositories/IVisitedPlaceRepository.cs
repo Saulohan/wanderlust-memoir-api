@@ -9,4 +9,6 @@ public interface IVisitedPlaceRepository
     Task<VisitedPlace> CreateAsync(VisitedPlace visitedPlace);
     Task<VisitedPlace> UpdateAsync(VisitedPlace visitedPlace);
     Task DeleteAsync(int id);
+    Task<VisitedPlacePhoto?> GetPhotoByIdAsync(int photoId);
+    Task<bool> DeletePhotoAsync(int placeId, int photoId);
 }

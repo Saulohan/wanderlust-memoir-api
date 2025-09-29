@@ -4,6 +4,8 @@ using WanderlustMemoir.Application.DTOs.Destinations;
 using WanderlustMemoir.Application.Features.Destinations.Commands;
 using WanderlustMemoir.Application.Features.Destinations.Queries;
 using WanderlustMemoir.Application.Interfaces;
+using WanderlustMemoir.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace WanderlustMemoir.Application.Services;
 
@@ -44,5 +46,25 @@ public class DestinationService : IDestinationService
     public async Task<DestinationDto?> ToggleDestinationVisitedAsync(int id)
     {
         return await _mediator.Send(new ToggleDestinationVisitedCommand(id));
+    }
+
+    public async Task<DestinationDto?> ToggleDestinationVisitedAsync(int id, string? visitDate)
+    {
+        return await _mediator.Send(new ToggleDestinationVisitedWithDateCommand(id, visitDate));
+    }
+
+    public async Task<DestinationDto?> UpdateDestinationRatingAsync(int id, int rating)
+    {
+        return await _mediator.Send(new UpdateDestinationRatingCommand(id, rating));
+    }
+
+    public async Task<DestinationDto?> UploadDestinationPhotosAsync(int id, List<IFormFile> photos)
+    {
+        return await _mediator.Send(new UploadDestinationPhotosCommand(id, photos));
+    }
+
+    public async Task<DestinationPhoto?> GetDestinationPhotoByIdAsync(int photoId)
+    {
+        return await _mediator.Send(new GetDestinationPhotoByIdQuery(photoId));
     }
 }

@@ -1,8 +1,11 @@
 using MediatR;
 using WanderlustMemoir.Application.DTOs.VisitedPlaces;
+using WanderlustMemoir.Application.DTOs.TravelStats;
 using WanderlustMemoir.Application.Features.VisitedPlaces.Commands;
 using WanderlustMemoir.Application.Features.VisitedPlaces.Queries;
 using WanderlustMemoir.Application.Interfaces;
+using WanderlustMemoir.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace WanderlustMemoir.Application.Services;
 
@@ -38,5 +41,30 @@ public class VisitedPlaceService : IVisitedPlaceService
     public async Task<bool> DeleteVisitedPlaceAsync(int id)
     {
         return await _mediator.Send(new DeleteVisitedPlaceCommand(id));
+    }
+
+    public async Task<VisitedPlaceDto?> UploadVisitedPlacePhotosAsync(int id, List<IFormFile> photos)
+    {
+        return await _mediator.Send(new UploadVisitedPlacePhotosCommand(id, photos));
+    }
+
+    public async Task<VisitedPlacePhoto?> GetPhotoByIdAsync(int photoId)
+    {
+        return await _mediator.Send(new GetPhotoByIdQuery(photoId));
+    }
+
+    public async Task<VisitedPlaceDto?> UpdateVisitedPlaceRatingAsync(int id, int rating)
+    {
+        return await _mediator.Send(new UpdateVisitedPlaceRatingCommand(id, rating));
+    }
+
+    public async Task<TravelStatsDto> GetTravelStatsAsync()
+    {
+        return await _mediator.Send(new GetTravelStatsQuery());
+    }
+
+    public async Task<bool> DeleteVisitedPlacePhotoAsync(int placeId, int photoId)
+    {
+        return await _mediator.Send(new DeleteVisitedPlacePhotoCommand(placeId, photoId));
     }
 }

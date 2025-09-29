@@ -2,9 +2,8 @@ namespace WanderlustMemoir.Application.DTOs.TravelStats;
 
 public class TravelStatsDto
 {
-    public int TotalDestinations { get; set; }
-    public int VisitedPlaces { get; set; }
-    public int TotalPhotos { get; set; }
-    public int CountriesExplored { get; set; }
-    public int PlannedDestinations { get; set; }
+    public int DreamDestinations { get; set; } // Destinos planejados (não visitados)
+    public int VisitedPlaces { get; set; } // Lugares visitados
+    public int SharedPhotos { get; set; } // Total de fotos compartilhadas
+    public int ExploredCountries { get; set; } // Países explorados
 }
