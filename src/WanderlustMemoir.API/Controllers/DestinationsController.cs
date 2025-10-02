@@ -180,6 +180,34 @@ public class DestinationsController : ControllerBase
     }
 
     /// <summary>
+    /// Updates the priority of a destination
+    /// </summary>
+    /// <param name="id">Destination id</param>
+    /// <param name="priorityDto">Priority data</param>
+    /// <returns>Updated destination</returns>
+    [HttpPatch("{id}/priority")]
+    public async Task<ActionResult<DestinationDto>> UpdateDestinationPriority(int id, [FromBody] UpdatePriorityDto priorityDto)
+    {
+        try
+        {
+            var validPriorities = new[] { "high", "medium", "low" };
+            if (!validPriorities.Contains(priorityDto.Priority.ToLower()))
+                return BadRequest($"Priority must be one of: {string.Join(", ", validPriorities)}");
+
+            var destination = await _destinationService.UpdateDestinationPriorityAsync(id, priorityDto.Priority.ToLower());
+            
+            if (destination == null)
+                return NotFound($"Destination with id {id} not found");
+                
+            return Ok(destination);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// Uploads photos for a destination (saves as BLOB in database)
     /// </summary>
     /// <param name="id">Destination id</param>

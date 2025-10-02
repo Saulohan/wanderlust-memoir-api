@@ -359,6 +359,46 @@ public class UpdateDestinationRatingHandler : IRequestHandler<UpdateDestinationR
     }
 }
 
+public class UpdateDestinationPriorityHandler : IRequestHandler<UpdateDestinationPriorityCommand, DestinationDto?>
+{
+    private readonly IDestinationRepository _repository;
+    private readonly IMapper _mapper;
+
+    public UpdateDestinationPriorityHandler(IDestinationRepository repository, IMapper mapper)
+    {
+        _repository = repository;
+        _mapper = mapper;
+    }
+
+    public async Task<DestinationDto?> Handle(UpdateDestinationPriorityCommand request, CancellationToken cancellationToken)
+    {
+        var destination = await _repository.GetByIdAsync(request.Id);
+        if (destination == null)
+            return null;
+
+        // Validar prioridade
+        var validPriorities = new[] { "high", "medium", "low" };
+        if (!validPriorities.Contains(request.Priority.ToLower()))
+        {
+            throw new ArgumentException($"Invalid priority: {request.Priority}. Valid values are: high, medium, low");
+        }
+
+        // Converter string para enum
+        destination.Priority = request.Priority.ToLower() switch
+        {
+            "high" => Priority.High,
+            "medium" => Priority.Medium,
+            "low" => Priority.Low,
+            _ => Priority.Medium
+        };
+
+        destination.UpdatedAt = DateTime.UtcNow;
+
+        var updatedDestination = await _repository.UpdateAsync(destination);
+        return _mapper.Map<DestinationDto>(updatedDestination);
+    }
+}
+
 public class UploadDestinationPhotosHandler : IRequestHandler<UploadDestinationPhotosCommand, DestinationDto?>
 {
     private readonly IDestinationRepository _repository;

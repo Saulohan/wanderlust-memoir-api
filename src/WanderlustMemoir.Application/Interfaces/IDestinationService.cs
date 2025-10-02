@@ -14,6 +14,7 @@ public interface IDestinationService
     Task<DestinationDto?> ToggleDestinationVisitedAsync(int id);
     Task<DestinationDto?> ToggleDestinationVisitedAsync(int id, string? visitDate);
     Task<DestinationDto?> UpdateDestinationRatingAsync(int id, int rating);
+    Task<DestinationDto?> UpdateDestinationPriorityAsync(int id, string priority);
     Task<DestinationDto?> UploadDestinationPhotosAsync(int id, List<IFormFile> photos);
     Task<DestinationPhoto?> GetDestinationPhotoByIdAsync(int photoId);
 }

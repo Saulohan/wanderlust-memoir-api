@@ -16,4 +16,6 @@ public record ToggleDestinationVisitedWithDateCommand(int Id, string? VisitDate)
 
 public record UpdateDestinationRatingCommand(int Id, int Rating) : IRequest<DestinationDto?>;
 
+public record UpdateDestinationPriorityCommand(int Id, string Priority) : IRequest<DestinationDto?>;
+
 public record UploadDestinationPhotosCommand(int Id, List<IFormFile> Photos) : IRequest<DestinationDto?>;

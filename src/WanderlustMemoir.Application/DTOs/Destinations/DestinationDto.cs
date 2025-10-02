@@ -55,3 +55,8 @@ public class UpdateRatingDto
 {
     public int Rating { get; set; }
 }
+
+public class UpdatePriorityDto
+{
+    public string Priority { get; set; } = string.Empty;
+}

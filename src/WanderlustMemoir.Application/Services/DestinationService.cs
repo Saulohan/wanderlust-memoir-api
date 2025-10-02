@@ -58,6 +58,11 @@ public class DestinationService : IDestinationService
         return await _mediator.Send(new UpdateDestinationRatingCommand(id, rating));
     }
 
+    public async Task<DestinationDto?> UpdateDestinationPriorityAsync(int id, string priority)
+    {
+        return await _mediator.Send(new UpdateDestinationPriorityCommand(id, priority));
+    }
+
     public async Task<DestinationDto?> UploadDestinationPhotosAsync(int id, List<IFormFile> photos)
     {
         return await _mediator.Send(new UploadDestinationPhotosCommand(id, photos));
