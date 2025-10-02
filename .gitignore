@@ -529,3 +529,4 @@ secrets.json
 # Docker
 .dockerignore
 docker-compose.override.yml
+/src/WanderlustMemoir.API/appsettings.json
