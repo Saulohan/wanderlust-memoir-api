@@ -27,10 +27,10 @@ try
         });
     });
 
-    // Add CORS for frontend
+    // Add CORS for frontend - Allow everything for development
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy("AllowAll", policy =>
+        options.AddPolicy("AllowAllOrigins", policy =>
         {
             policy.AllowAnyOrigin()
                   .AllowAnyMethod()
@@ -48,8 +48,10 @@ try
         app.UseSwaggerUI();
     }
 
+    // CORS must be configured before other middleware
+    app.UseCors("AllowAllOrigins");
+    
     app.UseHttpsRedirection();
-    app.UseCors("AllowAll");
     app.UseAuthorization();
 
     // Health check endpoint
